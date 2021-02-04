@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:productivityApp/utils/ui/styleguide.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:productivityApp/utils/ui/colorguide.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,13 +12,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: lightColor,
       body: Stack(
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.30,
             width: MediaQuery.of(context).size.width,
-            color: Theme.of(context).primaryColor,
+            color: primaryColor,
             padding: EdgeInsets.all(16),
             child: SafeArea(
               top: true,
@@ -51,15 +53,15 @@ class _HomeState extends State<Home> {
                       Row(
                         children: [
                           Icon(
-                            Icons.notifications,
-                            color: Colors.white,
+                            FontAwesomeIcons.solidBell,
+                            color: lightColor,
                           ),
                           SizedBox(
                             width: 16,
                           ),
                           Icon(
-                            Icons.person,
-                            color: Colors.white,
+                            FontAwesomeIcons.userAlt,
+                            color: lightColor,
                           )
                         ],
                       ),
@@ -78,8 +80,8 @@ class _HomeState extends State<Home> {
                       ),
                       Icon(
                         Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      )
+                        color: lightColor,
+                      ),
                     ],
                   )
                 ],

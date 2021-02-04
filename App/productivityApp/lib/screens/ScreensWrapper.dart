@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:productivityApp/screens/Activity/Activity.dart';
 import 'package:productivityApp/screens/Home/Home.dart';
+import 'package:productivityApp/utils/ui/colorguide.dart';
 
 class ScreensWrapper extends StatefulWidget {
   @override
@@ -21,9 +24,7 @@ class _ScreensWrapperState extends State<ScreensWrapper> {
               new Container(
                 color: Colors.lightGreen,
               ),
-              new Container(
-                color: Colors.red,
-              ),
+              Activity(),
               new Container(
                 color: Colors.purple,
               ),
@@ -32,28 +33,31 @@ class _ScreensWrapperState extends State<ScreensWrapper> {
           bottomNavigationBar: new TabBar(
             tabs: [
               Tab(
-                icon: new Icon(Icons.home),
+                icon: new Icon(FontAwesomeIcons.home),
               ),
               Tab(
-                icon: new Icon(Icons.calendar_today),
+                icon: new Icon(FontAwesomeIcons.calendarAlt),
               ),
               Tab(
-                icon: new Icon(Icons.add),
+                icon: new Icon(
+                  FontAwesomeIcons.plus,
+                  color: Colors.blue,
+                ),
               ),
               Tab(
-                icon: new Icon(Icons.polymer),
+                icon: new Icon(FontAwesomeIcons.chartLine),
               ),
               Tab(
-                icon: new Icon(Icons.settings),
+                icon: new Icon(FontAwesomeIcons.cog),
               )
             ],
-            labelColor: Color(0xffE74C3C),
+            labelColor: primaryColor,
             unselectedLabelColor: Colors.grey,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorPadding: EdgeInsets.all(5.0),
-            indicatorColor: Colors.red,
+            indicatorColor: primaryColor,
           ),
-          backgroundColor: Color(0xffF2F2F2),
+          backgroundColor: lightColor,
         ));
   }
 }
