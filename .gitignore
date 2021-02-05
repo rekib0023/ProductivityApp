@@ -372,3 +372,5 @@ lib/generated_plugin_registrant.dart
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter,python,flask,android,vscode
+.vscode/
+migrations/
