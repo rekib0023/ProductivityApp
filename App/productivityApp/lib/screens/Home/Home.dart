@@ -16,9 +16,12 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.30,
+            height: MediaQuery.of(context).size.height * 0.35,
             width: MediaQuery.of(context).size.width,
-            color: primaryColor,
+            // color: primaryColor,
+            decoration: BoxDecoration(
+              gradient: primaryGradient,
+            ),
             padding: EdgeInsets.all(16),
             child: SafeArea(
               top: true,
@@ -30,6 +33,9 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   // name + target count + notification + avatar
+                  SizedBox(
+                    height: 16,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +47,7 @@ class _HomeState extends State<Home> {
                         children: [
                           Text(
                             'Hi, Jane',
-                            style: whiteHeadingBold,
+                            style: mainHeadingLight,
                           ),
                           Text(
                             'You have 5 targets',
@@ -76,7 +82,7 @@ class _HomeState extends State<Home> {
                     children: [
                       Text(
                         'Your targets',
-                        style: whiteHeadingBold,
+                        style: mainHeadingLight,
                       ),
                       Icon(
                         Icons.arrow_forward_ios,

@@ -41,7 +41,7 @@ class _ScreensWrapperState extends State<ScreensWrapper> {
               Tab(
                 icon: new Icon(
                   FontAwesomeIcons.plus,
-                  color: Colors.blue,
+                  color: blueAccent,
                 ),
               ),
               Tab(

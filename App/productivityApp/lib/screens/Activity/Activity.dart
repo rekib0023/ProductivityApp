@@ -18,7 +18,7 @@ class _ActivityState extends State<Activity> {
         children: [
           Text(
             'oi',
-            style: darkHeadingBold,
+            style: mainHeadingDark,
           )
         ],
       ),
