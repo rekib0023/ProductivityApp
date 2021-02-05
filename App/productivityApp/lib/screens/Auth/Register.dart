@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
 import 'package:productivityApp/utils/ui/styleguide.dart';
 import 'package:productivityApp/widgets/CustomButtons.dart';
 import 'package:productivityApp/widgets/FormFields.dart';
 
 class Register extends StatefulWidget {
+  final Function toggleView;
+
+  const Register({Key key, this.toggleView}) : super(key: key);
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -123,7 +125,7 @@ class _RegisterState extends State<Register> {
                       ],
                     ),
                   ),
-                  onTap: getValues,
+                  onTap: widget.toggleView,
                 ),
               )
             ],

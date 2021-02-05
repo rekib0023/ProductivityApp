@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:productivityApp/screens/Auth/Register.dart';
+import 'package:productivityApp/screens/Auth/AuthPageWrapper.dart';
 import 'package:productivityApp/screens/ScreensWrapper.dart';
 
 class AuthWrapper extends StatelessWidget {
@@ -7,6 +7,6 @@ class AuthWrapper extends StatelessWidget {
   bool isAuthenticate = false;
   @override
   Widget build(BuildContext context) {
-    return isAuthenticate ? ScreensWrapper() : Register();
+    return isAuthenticate ? ScreensWrapper() : AuthPageWrapper();
   }
 }
