@@ -375,3 +375,4 @@ lib/generated_plugin_registrant.dart
 .vscode/
 migrations/
 *.db 
+Backend/site.db

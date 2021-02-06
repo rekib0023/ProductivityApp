@@ -11,6 +11,7 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
+    authKey = db.Column(db.String(250), unique=True, nullable=False)
     username = db.Column(db.String(250), unique=True, nullable=False)
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
@@ -18,7 +19,8 @@ class User(db.Model):
         db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False
     )
 
-    def __init__(self, username, email, password):
+    def __init__(self, authKey, username, email, password):
+        self.authKey = authKey
         self.username = username
         self.email = email
         self.password = password
@@ -26,6 +28,7 @@ class User(db.Model):
 
 class UserSchema(ma.Schema):
     id = fields.Integer(dump_only=True)
+    authKey = fields.String(required=True)
     username = fields.String(required=True)
     email = fields.String(required=True)
     password = fields.String(required=True)
