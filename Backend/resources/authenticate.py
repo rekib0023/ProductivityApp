@@ -36,7 +36,7 @@ class Register(Resource):
         db.session.add(user)
         db.session.commit()
         result = user_schema.dump(user).data
-        return {"status": "success", "data": result}, 201
+        return {"status": "success", "data": result["authKey"]}, 201
 
     def generate_key(self):
         return "".join(
@@ -48,11 +48,10 @@ class Sigin(Resource):
     def get(self):
         json_data = request.get_json(force=True)
         if not json_data:
-            return {"message": "No input data provided"}, 400
-        user = User.query.filter_by(username=json_data["username"]).first()
+            return {"error": "No input data provided"}, 400
+        user = User.query.filter_by(email=json_data["email"]).first()
         if not user:
-            return {"message": "Username does not exist"}, 400
+            return {"error": "User does not exist"}, 400
         if not bcrypt.check_password_hash(user.password, json_data["password"]):
-            return {"message": "Password incorrect"}, 400
-        user = user_schema.dump(user).data
-        return {"status": "success", "data": user}, 200
+            return {"error": "Password incorrect"}, 400
+        return {"token": user.authKey}, 200

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:productivityApp/screens/authWapper.dart';
+import 'package:productivityApp/utils/services/local_storage_service.dart';
 import 'package:productivityApp/utils/ui/styleguide.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
@@ -65,10 +67,29 @@ class _HomeState extends State<Home> {
                           SizedBox(
                             width: 16,
                           ),
-                          Icon(
-                            FontAwesomeIcons.userAlt,
-                            color: lightColor,
+                          IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.userAlt,
+                              color: lightColor,
+                            ),
+                            onPressed: () {
+                              removeValues("authKey");
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AuthWrapper(
+                                    authKey: null,
+                                    logOut: true,
+                                  ),
+                                ),
+                                (Route<dynamic> route) => route is AuthWrapper,
+                              );
+                            },
                           )
+                          // Icon(
+                          //   FontAwesomeIcons.userAlt,
+                          //   color: lightColor,
+                          // )
                         ],
                       ),
                     ],

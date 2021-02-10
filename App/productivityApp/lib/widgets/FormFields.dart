@@ -1,35 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:productivityApp/utils/ui/colorguide.dart';
 import 'package:productivityApp/utils/ui/text_input_guides.dart';
-
-// class UserFormField extends StatelessWidget {
-//   final Function onChanged;
-
-//   const UserFormField({Key key, this.onChanged}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextField(
-//       decoration: textInputDecoration.copyWith(labelText: 'Username'),
-//       validator: (val) => val.isEmpty ? 'Enter an username' : null,
-//       onChanged: onChanged,
-//     );
-//   }
-// }
 
 class EmailFormField extends StatelessWidget {
   final String hintText;
-  final Function onChanged;
-  // final TextEditingController textEditingController;
+  final Function onSaved;
 
-  const EmailFormField({Key key, this.hintText, this.onChanged})
+  const EmailFormField({Key key, this.hintText, this.onSaved})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextField(
+      child: TextFormField(
         decoration: textInputDecoration.copyWith(
           hintText: hintText,
           prefixIcon: new Icon(
@@ -38,7 +21,9 @@ class EmailFormField extends StatelessWidget {
             size: 18,
           ),
         ),
-        onChanged: onChanged,
+        onSaved: onSaved,
+        validator: (val) =>
+            !val.contains("@") ? 'Email id should be valid' : null,
       ),
     );
   }
@@ -46,15 +31,15 @@ class EmailFormField extends StatelessWidget {
 
 class UserNameFormField extends StatelessWidget {
   final String hintText;
-  final Function onChanged;
+  final Function onSaved;
 
-  const UserNameFormField({Key key, this.hintText, this.onChanged})
+  const UserNameFormField({Key key, this.hintText, this.onSaved})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextField(
+      child: TextFormField(
         decoration: textInputDecoration.copyWith(
           hintText: hintText,
           prefixIcon: new Icon(
@@ -63,91 +48,54 @@ class UserNameFormField extends StatelessWidget {
             size: 18,
           ),
         ),
-        onChanged: onChanged,
+        onSaved: onSaved,
+        validator: (val) => val.isEmpty ? 'Enter an username' : null,
       ),
     );
   }
 }
 
-class PasswordFormField extends StatelessWidget {
+class PasswordFormField extends StatefulWidget {
   final String hintText;
-  final Function onChanged;
+  final Function onSaved;
+  final Function validator;
+  // bool hidePassword = true;
 
-  const PasswordFormField({Key key, this.hintText, this.onChanged})
+  const PasswordFormField(
+      {Key key, this.hintText, this.onSaved, this.validator})
       : super(key: key);
 
   @override
+  _PasswordFormFieldState createState() => _PasswordFormFieldState();
+}
+
+class _PasswordFormFieldState extends State<PasswordFormField> {
+  bool hidePassword = true;
+  @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextField(
+      child: TextFormField(
         decoration: textInputDecoration.copyWith(
-          hintText: hintText,
-          prefixIcon: new Icon(
-            FontAwesomeIcons.key,
-            color: Color(0xFF060C2D),
-            size: 18,
-          ),
-        ),
-        onChanged: onChanged,
-        obscureText: true,
+            hintText: widget.hintText,
+            prefixIcon: new Icon(
+              FontAwesomeIcons.key,
+              color: Color(0xFF060C2D),
+              size: 18,
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  hidePassword = !hidePassword;
+                });
+              },
+              icon: hidePassword
+                  ? Icon(Icons.visibility_off)
+                  : Icon(Icons.visibility),
+            )),
+        onSaved: widget.onSaved,
+        obscureText: hidePassword,
+        validator: widget.validator,
       ),
     );
   }
 }
-
-// class UserNameFormField extends StatelessWidget {
-//   // final Function onChanged;
-
-//   // const EmailFormField({Key key, @required this.onChanged}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: TextField(
-//         decoration: textInputDecoration.copyWith(
-//           hintText: 'Username',
-//           icon: new Icon(
-//             FontAwesomeIcons.user,
-//             color: primaryColor,
-//           ),
-//         ),
-//         // validator: (val) => val.isEmpty ? 'Enter an email!' : null,
-//         // onChanged: onChanged,
-//       ),
-//     );
-//   }
-// }
-
-// class PasswordFormField extends StatelessWidget {
-//   final Function onChanged;
-//   const PasswordFormField({Key key, @required this.onChanged})
-//       : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextField(
-//       decoration: textInputDecoration.copyWith(
-//           labelText: 'Password',
-//           helperText: 'This has to be over 6 characters in length'),
-//       validator: (val) => val.length < 6
-//           ? 'Password must have more than six characters!'
-//           : null,
-//       obscureText: true,
-//       onChanged: onChanged,
-//     );
-//   }
-// }
-
-// class NumberOnlyField extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextField(
-//         keyboardType: TextInputType.number,
-//         inputFormatters: <TextInputFormatter>[
-//           WhitelistingTextInputFormatter.digitsOnly
-//         ],
-//         decoration: InputDecoration(
-//           hintText: 'Set Number',
-//         ));
-//   }
-// }
