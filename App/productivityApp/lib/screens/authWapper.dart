@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:productivityApp/models/authorize_model.dart';
+import 'package:productivityApp/models/user_model.dart';
 import 'package:productivityApp/screens/Auth/AuthPageWrapper.dart';
 import 'package:productivityApp/screens/ScreensWrapper.dart';
 import 'package:productivityApp/utils/services/local_storage_service.dart';
@@ -17,11 +18,13 @@ class AuthWrapper extends StatefulWidget {
 class _AuthWrapperState extends State<AuthWrapper> {
   bool isAuthenticate = false;
   String authKey;
+  dynamic user;
   _AuthWrapperState(this.authKey);
 
   @override
   void initState() {
     super.initState();
+    // user = new UserModel();
     if (authKey == null) {
       getStringValuesSF("authKey").then((value) {
         setState(() => authKey = value);
@@ -38,7 +41,14 @@ class _AuthWrapperState extends State<AuthWrapper> {
         if (value.user.isNotEmpty) {
           setState(() {
             isAuthenticate = true;
+            user = value.user;
+            // addStringToSF
+            // user.user_authKey = value.user['authkey'];
+            // user.user_name = value.user['username'];
+            // user.user_email = value.user['email'];
+            // user.user_creationDate = value.user['creationDate'];
           });
+          print(user);
         }
       }
     });
@@ -47,7 +57,9 @@ class _AuthWrapperState extends State<AuthWrapper> {
   @override
   Widget build(BuildContext context) {
     return isAuthenticate && !widget.logOut
-        ? ScreensWrapper()
+        ? ScreensWrapper(
+            user: user,
+          )
         : AuthPageWrapper();
   }
 }

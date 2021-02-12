@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productivityApp/models/user_model.dart';
 import 'package:productivityApp/screens/authWapper.dart';
 import 'package:productivityApp/utils/services/local_storage_service.dart';
 import 'package:productivityApp/utils/ui/styleguide.dart';
@@ -6,6 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
 
 class Home extends StatefulWidget {
+  final dynamic user;
+
+  const Home({Key key, this.user}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
@@ -48,7 +52,7 @@ class _HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hi, Jane',
+                            'Hi, ' + widget.user["username"],
                             style: mainHeadingLight,
                           ),
                           Text(

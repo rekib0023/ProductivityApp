@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:productivityApp/models/user_model.dart';
 import 'package:productivityApp/screens/Activity/Activity.dart';
 import 'package:productivityApp/screens/Home/Home.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
 
 class ScreensWrapper extends StatefulWidget {
+  final dynamic user;
+
+  const ScreensWrapper({Key key, this.user}) : super(key: key);
   @override
   _ScreensWrapperState createState() => _ScreensWrapperState();
 }
