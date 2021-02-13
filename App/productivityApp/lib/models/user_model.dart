@@ -1,38 +1,27 @@
-class UserModel {
-  String name;
-  String email;
-  String authKey;
-  DateTime creationDate;
+class User {
+  final String name;
+  final String email;
+  final String authKey;
+  final int id;
+  final String creationDate;
+  final String password;
 
-  String get user_name {
-    return user_name;
-  }
+  User(
+      {this.name,
+      this.email,
+      this.authKey,
+      this.id,
+      this.creationDate,
+      this.password});
 
-  String get user_email {
-    return email;
-  }
-
-  String get user_authKey {
-    return authKey;
-  }
-
-  DateTime get user_creationDate {
-    return creationDate;
-  }
-
-  set user_name(String name) {
-    this.name = name;
-  }
-
-  set user_email(String email) {
-    this.email = email;
-  }
-
-  set user_authKey(String authKey) {
-    this.authKey = authKey;
-  }
-
-  set user_creationDate(DateTime creationDate) {
-    this.creationDate = creationDate;
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      name: json["username"],
+      email: json["email"],
+      authKey: json["authKey"],
+      id: json["id"],
+      password: json["password"],
+      creationDate: json["creation_date"],
+    );
   }
 }

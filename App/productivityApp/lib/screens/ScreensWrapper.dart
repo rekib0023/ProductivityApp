@@ -3,17 +3,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:productivityApp/models/user_model.dart';
 import 'package:productivityApp/screens/Activity/Activity.dart';
 import 'package:productivityApp/screens/Home/Home.dart';
+import 'package:productivityApp/utils/services/rest_api_service.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
 
 class ScreensWrapper extends StatefulWidget {
-  final dynamic user;
-
-  const ScreensWrapper({Key key, this.user}) : super(key: key);
+  final String authKey;
+  const ScreensWrapper({Key key, this.authKey}) : super(key: key);
   @override
   _ScreensWrapperState createState() => _ScreensWrapperState();
 }
 
 class _ScreensWrapperState extends State<ScreensWrapper> {
+  Future<User> futureUser;
+
+  @override
+  void initState() {
+    super.initState();
+    AuthService authService = new AuthService();
+    futureUser = authService.authorize(widget.authKey);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -21,7 +30,21 @@ class _ScreensWrapperState extends State<ScreensWrapper> {
         child: new Scaffold(
           body: TabBarView(
             children: [
-              Home(),
+              FutureBuilder<User>(
+                future: futureUser,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Home(
+                      user: snapshot.data,
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
               new Container(
                 color: Colors.orange,
               ),

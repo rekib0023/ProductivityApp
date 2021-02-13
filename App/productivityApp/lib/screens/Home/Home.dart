@@ -7,14 +7,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
 
 class Home extends StatefulWidget {
-  final dynamic user;
-
+  final User user;
   const Home({Key key, this.user}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  _HomeState();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,6 @@ class _HomeState extends State<Home> {
           Container(
             height: MediaQuery.of(context).size.height * 0.35,
             width: MediaQuery.of(context).size.width,
-            // color: primaryColor,
             decoration: BoxDecoration(
               gradient: primaryGradient,
             ),
@@ -52,7 +56,7 @@ class _HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hi, ' + widget.user["username"],
+                            'Hi, ' + widget.user.name,
                             style: mainHeadingLight,
                           ),
                           Text(
@@ -81,10 +85,7 @@ class _HomeState extends State<Home> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AuthWrapper(
-                                    authKey: null,
-                                    logOut: true,
-                                  ),
+                                  builder: (context) => AuthWrapper(),
                                 ),
                                 (Route<dynamic> route) => route is AuthWrapper,
                               );

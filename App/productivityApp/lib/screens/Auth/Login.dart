@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:productivityApp/models/login_model.dart';
-import 'package:productivityApp/screens/authWapper.dart';
+import 'package:productivityApp/screens/ScreensWrapper.dart';
 import 'package:productivityApp/utils/services/local_storage_service.dart';
 import 'package:productivityApp/utils/services/rest_api_service.dart';
 import 'package:productivityApp/utils/ui/colorguide.dart';
@@ -120,13 +120,10 @@ class _LoginState extends State<Login> {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => AuthWrapper(
-                                      authKey: value.token,
-                                      logOut: false,
-                                    ),
+                                    builder: (context) => ScreensWrapper(),
                                   ),
                                   (Route<dynamic> route) =>
-                                      route is AuthWrapper,
+                                      route is ScreensWrapper,
                                 );
                               } else {
                                 final snackBar =

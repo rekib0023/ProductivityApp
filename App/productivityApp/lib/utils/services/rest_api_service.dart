@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'package:productivityApp/constants/api_path.dart';
-import 'package:productivityApp/models/authorize_model.dart';
 import 'dart:convert';
 import 'package:productivityApp/models/login_model.dart';
 import 'package:productivityApp/models/register_model.dart';
+import 'package:productivityApp/models/user_model.dart';
 
 class AuthService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
@@ -22,17 +22,16 @@ class AuthService {
     }
   }
 
-  Future<AuthResponseModel> authorize(AuthRequestModel requestModel) async {
-    var bodyValue = requestModel.toJson();
-    var _authKey = bodyValue["authKey"];
+  Future<User> authorize(String authKey) async {
     var queryParams = {
-      'authKey': _authKey,
+      'authKey': authKey,
     };
     String queryRequest = Uri(queryParameters: queryParams).query;
     String url = apiPath + "/authorize" + "?" + queryRequest;
     final response = await http.get(url);
+
     if (response.statusCode == 200 || response.statusCode == 400) {
-      return AuthResponseModel.fromJson(
+      return User.fromJson(
         json.decode(response.body),
       );
     } else {

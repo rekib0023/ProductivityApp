@@ -8,15 +8,15 @@ class AuthPageWrapper extends StatefulWidget {
 }
 
 class _AuthPageWrapperState extends State<AuthPageWrapper> {
-  bool showSignIn = true;
+  bool showLogin = true;
 
   void toggleView() {
-    setState(() => showSignIn = !showSignIn);
+    setState(() => showLogin = !showLogin);
   }
 
   @override
   Widget build(BuildContext context) {
-    return showSignIn
+    return showLogin
         ? Login(toggleView: toggleView)
         : Register(toggleView: toggleView);
   }
